@@ -1,10 +1,16 @@
 #pragma once
 #include <qvector.h>
 #include <qthread.h>
+#include <functional>
+
 #include "File.h"
 
-class FileMonitor
+class ThreadWorker;
+
+class FileMonitor : public QObject
 {
+	Q_OBJECT
+
 public:
 	FileMonitor();
 	~FileMonitor();
@@ -16,22 +22,26 @@ public:
 
 	void update();
 
-	void start();
+	void addUpdateCallback(std::function<void(QVector<File>)> callback);
+
+signals:
+	void onUpdate(QVector<File> files);
 
 private:
-	class ThreadWorker : public QThread
-	{
-	public:
-		ThreadWorker(FileMonitor* instance);
-		~ThreadWorker();
-
-	protected:
-		void run() override;
-
-	private:
-		FileMonitor* monitor;
-	};
 
 	QVector<File> files_to_watch;
 	ThreadWorker* thread;
+};
+
+class ThreadWorker : public QThread
+{
+public:
+	ThreadWorker(FileMonitor* instance);
+	~ThreadWorker();
+
+protected:
+	void run() override;
+
+private:
+	FileMonitor* monitor;
 };

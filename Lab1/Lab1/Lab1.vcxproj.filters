@@ -32,15 +32,19 @@
     <ClCompile Include="FileMonitor.cpp">
       <Filter>Translation Files</Filter>
     </ClCompile>
+    <ClCompile Include="Display.cpp">
+      <Filter>Translation Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="File.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="FileMonitor.h">
+    <QtMoc Include="FileMonitor.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
+    </QtMoc>
+    <QtMoc Include="Display.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

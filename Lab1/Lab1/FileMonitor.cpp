@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "FileMonitor.h"
 
 FileMonitor::FileMonitor()
@@ -10,6 +8,7 @@ FileMonitor::FileMonitor()
 
 FileMonitor::~FileMonitor()
 {
+	thread->terminate();
 	thread->wait();
 	delete thread;
 }
@@ -21,7 +20,7 @@ void FileMonitor::addFile(QString filepath)
 	QString filename;
 
 	int i = filepath.size() - 1;
-	while (i >= 0 && filepath[i] != '\\') i--;
+	while (i >= 0 && filepath[i] != '/') i--;
 
 	if (i == filepath.size() - 1)
 		return;
@@ -65,27 +64,29 @@ void FileMonitor::update()
 {
 	for (int i = 0; i < files_to_watch.size(); i++)
 		files_to_watch[i].update();
+
+	emit onUpdate(files_to_watch);
 }
 
-void FileMonitor::start()
+void FileMonitor::addUpdateCallback(std::function<void(QVector<File>)> callback)
 {
-	while (1)
-	{
-		thread->start();
-		thread->wait();
-	}
+	QObject::connect(this, &FileMonitor::onUpdate, callback);
 }
 
-FileMonitor::ThreadWorker::ThreadWorker(FileMonitor* instance)
+ThreadWorker::ThreadWorker(FileMonitor* instance)
 {
 	monitor = instance;
 }
 
-FileMonitor::ThreadWorker::~ThreadWorker()
+ThreadWorker::~ThreadWorker()
 {
 }
 
-void FileMonitor::ThreadWorker::run()
+void ThreadWorker::run()
 {
-	monitor->update();
+	while (true)
+	{
+		monitor->update();
+		sleep(5);
+	}
 }

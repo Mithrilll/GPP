@@ -26,9 +26,10 @@ public:
 
 	void update();
 	FileState getState();
+	QString getFilePath();
 
-	void operator=(const File& other);
-	void operator=(File&& other);
+	void operator=(const File& other)noexcept;
+	void operator=(File&& other)noexcept;
 
 	bool operator==(const QString& filepath);
 

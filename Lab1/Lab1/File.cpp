@@ -97,7 +97,12 @@ File::FileState File::getState()
 	return current_state;
 }
 
-void File::operator=(const File& other)
+QString File::getFilePath()
+{
+	return directory.absolutePath() + "/" + filename;
+}
+
+void File::operator=(const File& other)noexcept
 {
 	if (this == &other)
 		return;
@@ -108,7 +113,7 @@ void File::operator=(const File& other)
 	current_state = other.current_state;
 }
 
-void File::operator=(File&& other)
+void File::operator=(File&& other)noexcept
 {
 	if (this == &other)
 		return;
