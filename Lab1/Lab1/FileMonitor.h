@@ -1,5 +1,6 @@
 #pragma once
 #include <qvector.h>
+#include <qthread.h>
 #include "File.h"
 
 class FileMonitor
@@ -13,7 +14,24 @@ public:
 
 	bool contains(QString filepath);
 
+	void update();
+
+	void start();
+
 private:
+	class ThreadWorker : public QThread
+	{
+	public:
+		ThreadWorker(FileMonitor* instance);
+		~ThreadWorker();
+
+	protected:
+		void run() override;
+
+	private:
+		FileMonitor* monitor;
+	};
 
 	QVector<File> files_to_watch;
+	ThreadWorker* thread;
 };

@@ -10,5 +10,7 @@ int main(int argc, char *argv[])
 
     inst.addFile("Lol");
 
+    inst.start();
+
     return a.exec();
 }
