@@ -8,9 +8,15 @@ class Display : public QObject
 	Q_OBJECT
 
 public:
-	Display();
-	~Display();
+	virtual ~Display();
+
+	static Display& get() { return instance; }
 
 public slots:
 	void update(QVector<File> files);
+
+private:
+	static Display instance;
+
+	explicit Display(QObject *parent = nullptr);
 };

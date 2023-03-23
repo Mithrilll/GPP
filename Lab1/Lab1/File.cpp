@@ -126,5 +126,5 @@ void File::operator=(File&& other)noexcept
 
 bool File::operator==(const QString& filepath)
 {
-	return (directory.absolutePath() + filename) == filepath;
+	return (directory.absolutePath()+ "/" + filename) == filepath;
 }

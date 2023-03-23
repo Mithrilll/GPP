@@ -1,8 +1,10 @@
 #include "FileMonitor.h"
 
-FileMonitor::FileMonitor()
+FileMonitor FileMonitor::instance;
+
+FileMonitor::FileMonitor(QObject *parent) : QObject(parent)
 {
-	thread = new ThreadWorker(this);
+	thread = new ThreadWorker();
 	thread->start();
 }
 
@@ -15,6 +17,8 @@ FileMonitor::~FileMonitor()
 
 void FileMonitor::addFile(QString filepath)
 {
+	if (contains(filepath))
+		return;
 
 	QString dir_path;
 	QString filename;
@@ -33,7 +37,6 @@ void FileMonitor::addFile(QString filepath)
 
 void FileMonitor::removeFile(QString filepath)
 {
-
 	for (int i = 0; i < files_to_watch.size(); i++)
 	{
 		if (files_to_watch[i] == filepath)
@@ -46,7 +49,6 @@ void FileMonitor::removeFile(QString filepath)
 
 bool FileMonitor::contains(QString filepath)
 {
-
 	bool ans = false;
 	for (int i = 0; i < files_to_watch.size(); i++)
 	{
@@ -73,20 +75,19 @@ void FileMonitor::addUpdateCallback(std::function<void(QVector<File>)> callback)
 	QObject::connect(this, &FileMonitor::onUpdate, callback);
 }
 
-ThreadWorker::ThreadWorker(FileMonitor* instance)
-{
-	monitor = instance;
-}
-
-ThreadWorker::~ThreadWorker()
+FileMonitor::ThreadWorker::ThreadWorker()
 {
 }
 
-void ThreadWorker::run()
+FileMonitor::ThreadWorker::~ThreadWorker()
+{
+}
+
+void FileMonitor::ThreadWorker::run()
 {
 	while (true)
 	{
-		monitor->update();
+		FileMonitor::get().update();
 		sleep(5);
 	}
 }

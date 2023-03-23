@@ -12,8 +12,9 @@ class FileMonitor : public QObject
 	Q_OBJECT
 
 public:
-	FileMonitor();
-	~FileMonitor();
+	virtual ~FileMonitor();
+
+	static FileMonitor& get() { return instance; }
 
 	void addFile(QString filepath);
 	void removeFile(QString filepath);
@@ -28,20 +29,22 @@ signals:
 	void onUpdate(QVector<File> files);
 
 private:
+	class ThreadWorker : public QThread
+	{
+	public:
+		ThreadWorker();
+		~ThreadWorker();
+
+	protected:
+		void run() override;
+	};
+
+	static FileMonitor instance;
+
+	explicit FileMonitor(QObject *parent = nullptr);
 
 	QVector<File> files_to_watch;
 	ThreadWorker* thread;
-};
 
-class ThreadWorker : public QThread
-{
-public:
-	ThreadWorker(FileMonitor* instance);
-	~ThreadWorker();
-
-protected:
-	void run() override;
-
-private:
-	FileMonitor* monitor;
+	friend class ThreadWorker;
 };
