@@ -2,6 +2,7 @@
 #include <qvector.h>
 #include <qthread.h>
 #include <functional>
+#include <memory>
 
 #include "File.h"
 
@@ -23,10 +24,8 @@ public:
 
 	void update();
 
-	void addUpdateCallback(std::function<void(QVector<File>)> callback);
-
 signals:
-	void onUpdate(QVector<File> files);
+	void onUpdate(File files);
 
 private:
 	class ThreadWorker : public QThread

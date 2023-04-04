@@ -1,10 +1,9 @@
 #include "File.h"
 
-File::File(QDir dir, QString name)
+File::File(QString path)
 {
-	directory = dir;
-	filename = name;
-	QFileInfo info = {directory, filename};
+	filepath = path;
+	QFileInfo info = { filepath };
 	if (info.exists())
 	{
 		size = info.size();
@@ -19,23 +18,23 @@ File::File(QDir dir, QString name)
 
 File::File(const File& other) noexcept
 {
-	directory = other.directory;
-	filename = other.filename;
+	filepath = other.filepath;
 	size = other.size;
 	current_state = other.current_state;
 }
 
 File::File(File&& other) noexcept
 {
-	directory = other.directory;
-	filename = other.filename;
+	filepath = other.filepath;
 	size = other.size;
 	current_state = other.current_state;
 }
 
-void File::update()
+bool File::update()
 {
-	QFileInfo info = { directory, filename };
+	QFileInfo info = { filepath };
+
+	bool stateChanged = false;
 
 	if (info.exists())
 	{
@@ -43,31 +42,20 @@ void File::update()
 		switch (current_state)
 		{
 		case FileState::NOT_EXIST:
+		case FileState::DELETED:
 			current_state = FileState::CREATED;
 			size = current_size;
+			stateChanged = true;
 			break;
 		case FileState::EXIST:
+		case FileState::CREATED:
+		case FileState::SIZE_CHANGED:
 			if (size != current_size)
 			{
 				current_state = FileState::SIZE_CHANGED;
 				size = current_size;
+				stateChanged = true;
 			}
-			break;
-		case FileState::CREATED:
-		case FileState::SIZE_CHANGED:
-			if (size == current_size)
-			{
-				current_state = FileState::EXIST;
-			}
-			else
-			{
-				current_state = FileState::SIZE_CHANGED;
-				size = current_size;
-			}
-			break;
-		case FileState::DELETED:
-			current_state = FileState::CREATED;
-			size = current_size;
 			break;
 		default:
 			break;
@@ -82,14 +70,18 @@ void File::update()
 		case FileState::EXIST:
 		case FileState::CREATED:
 		case FileState::SIZE_CHANGED:
-		case FileState::DELETED:
 			current_state = FileState::DELETED;
 			size = 0;
+			stateChanged = true;
+			break;
+		case FileState::DELETED:
 			break;
 		default:
 			break;
 		}
 	}
+
+	return stateChanged;
 }
 
 File::FileState File::getState()
@@ -99,7 +91,7 @@ File::FileState File::getState()
 
 QString File::getFilePath()
 {
-	return directory.absolutePath() + "/" + filename;
+	return filepath;
 }
 
 void File::operator=(const File& other)noexcept
@@ -107,8 +99,7 @@ void File::operator=(const File& other)noexcept
 	if (this == &other)
 		return;
 
-	directory = other.directory;
-	filename = other.filename;
+	filepath = other.filepath;
 	size = other.size;
 	current_state = other.current_state;
 }
@@ -118,13 +109,12 @@ void File::operator=(File&& other)noexcept
 	if (this == &other)
 		return;
 
-	directory = other.directory;
-	filename = other.filename;
+	filepath = other.filepath;
 	size = other.size;
 	current_state = other.current_state;
 }
 
-bool File::operator==(const QString& filepath)
+bool File::operator==(const QString& path)
 {
-	return (directory.absolutePath()+ "/" + filename) == filepath;
+	return  path == filepath;
 }

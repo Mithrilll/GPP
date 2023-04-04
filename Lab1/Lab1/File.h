@@ -18,25 +18,24 @@ public:
 		DELETED
 	};
 
-
-	File(QDir dir, QString name);
+	File() = default;
+	File(QString path);
 	File(const File& other) noexcept;
 	File(File&& other) noexcept;
 	~File() = default;
 
-	void update();
+	bool update();
 	FileState getState();
 	QString getFilePath();
 
 	void operator=(const File& other)noexcept;
 	void operator=(File&& other)noexcept;
 
-	bool operator==(const QString& filepath);
+	bool operator==(const QString& path);
 
 private:
 	int size;
-	QString filename;
-	QDir directory;
+	QString filepath;
 	FileState current_state;
 };
 

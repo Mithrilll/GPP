@@ -20,19 +20,9 @@ void FileMonitor::addFile(QString filepath)
 	if (contains(filepath))
 		return;
 
-	QString dir_path;
-	QString filename;
+	files_to_watch.push_back({filepath});
 
-	int i = filepath.size() - 1;
-	while (i >= 0 && filepath[i] != '/') i--;
-
-	if (i == filepath.size() - 1)
-		return;
-
-	dir_path = filepath.left(i);
-	filename = filepath.right(filepath.size() - i - 1);
-
-	files_to_watch.push_back({ QDir(dir_path), filename });
+	emit onUpdate(files_to_watch[files_to_watch.size()-1]);
 }
 
 void FileMonitor::removeFile(QString filepath)
@@ -41,6 +31,7 @@ void FileMonitor::removeFile(QString filepath)
 	{
 		if (files_to_watch[i] == filepath)
 		{
+			auto file = files_to_watch[i];
 			files_to_watch.remove(i);
 			break;
 		}
@@ -65,14 +56,12 @@ bool FileMonitor::contains(QString filepath)
 void FileMonitor::update()
 {
 	for (int i = 0; i < files_to_watch.size(); i++)
-		files_to_watch[i].update();
-
-	emit onUpdate(files_to_watch);
-}
-
-void FileMonitor::addUpdateCallback(std::function<void(QVector<File>)> callback)
-{
-	QObject::connect(this, &FileMonitor::onUpdate, callback);
+	{
+		if (files_to_watch[i].update())
+		{
+			emit onUpdate(files_to_watch[i]);
+		}
+	}
 }
 
 FileMonitor::ThreadWorker::ThreadWorker()
