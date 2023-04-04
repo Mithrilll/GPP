@@ -1,5 +1,6 @@
 #pragma once
 #include <qvector.h>
+#include <qsharedpointer.h>
 
 #include "File.h"
 
@@ -13,7 +14,7 @@ public:
 	static Display& get() { return instance; }
 
 public slots:
-	void update(QVector<File> files);
+	void show(File file);
 
 private:
 	static Display instance;
