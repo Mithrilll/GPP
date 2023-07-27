@@ -1,58 +1,45 @@
-#include "CPP.h"
+#include "CSharp.h"
 
-CPPClass::CPPClass(std::string n)
+CSharpClass::CSharpClass(std::string n)
 {
 	name = n;
 }
 
-std::string CPPClass::compile() const
+std::string CSharpClass::compile() const
 {
 	std::string program;
-	
+
 	program += "class " + name + "\n";
 	program += "{\n";
 
-	std::string public_zone		= "public:\n";
-	std::string protected_zone	= "protected:\n";
-	std::string private_zone	= "private:\n";
-
-	
 	for (int i = 0; i < units.size(); i++)
 	{
+		// TODO:: add tabs logic
 		switch (units[i].second)
 		{
 		case Public:
-			public_zone += units[i].first->compile() + "\n";
+			program += "public " + units[i].first->compile() + "\n";
 			break;
 		case Protected:
-			protected_zone += units[i].first->compile() + "\n";
+			program += "protected " + units[i].first->compile() + "\n";
 			break;
 		case Private:
-			private_zone += units[i].first->compile() + "\n";
+			program += "private " + units[i].first->compile() + "\n";
 			break;
 		}
 	}
-
-	// TODO:: add tabs logic
-
-	if(public_zone != std::string("public:\n"))
-		program += public_zone;
-	if (protected_zone != std::string("protected:\n"))
-		program += protected_zone;
-	if (private_zone != std::string("private:\n"))
-		program += private_zone;
 
 	program += "}\n";
 
 	return program;
 }
 
-CPPMethod::CPPMethod(MethodSignature s)
+CSharpMethod::CSharpMethod(MethodSignature s)
 {
 	signature = s;
 }
 
-std::string CPPMethod::compile() const
+std::string CSharpMethod::compile() const
 {
 	std::string program;
 
@@ -76,7 +63,7 @@ std::string CPPMethod::compile() const
 		program += "double ";
 		break;
 	case String:
-		program += "char* ";
+		program += "string ";
 		break;
 	case Char:
 		program += "char ";
@@ -105,7 +92,7 @@ std::string CPPMethod::compile() const
 			program += "double ";
 			break;
 		case String:
-			program += "char* ";
+			program += "string ";
 			break;
 		case Char:
 			program += "char ";
@@ -121,7 +108,7 @@ std::string CPPMethod::compile() const
 	}
 	program += ") ";
 	if (signature.is_const)
-		program += "const";
+		program += ""; // no this functiol in C#
 
 	program += "\n";
 
@@ -171,33 +158,33 @@ std::string CPPMethod::compile() const
 	return program;
 }
 
-CPPPrintOperator::CPPPrintOperator(std::string out)
+CSharpPrintOperator::CSharpPrintOperator(std::string out)
 {
 	output = out;
 }
 
-CPPPrintOperator::~CPPPrintOperator()
+CSharpPrintOperator::~CSharpPrintOperator()
 {
 }
 
-std::string CPPPrintOperator::compile() const
+std::string CSharpPrintOperator::compile() const
 {
-	std::string program = "std::cout << \"" + output + "\" << std::endl;\n";
+	std::string program = "System.Console.WriteLine(\"" + output + "\");\n";
 
 	return program;
 }
 
-std::shared_ptr<ClassUnit> CPPFactory::createClass(std::string name) const
+std::shared_ptr<ClassUnit> CSharpFactory::createClass(std::string name) const
 {
-	return std::make_shared<CPPClass>(CPPClass(name));
+	return std::make_shared<CSharpClass>(CSharpClass(name));
 }
 
-std::shared_ptr<MethodUnit> CPPFactory::createMethod(MethodUnit::MethodSignature signature) const
+std::shared_ptr<MethodUnit> CSharpFactory::createMethod(MethodUnit::MethodSignature signature) const
 {
-	return std::make_shared<CPPMethod>(CPPMethod(signature));
+	return std::make_shared<CSharpMethod>(CSharpMethod(signature));
 }
 
-std::shared_ptr<PrintOperatorUnit> CPPFactory::createPrintOperator(std::string output) const
+std::shared_ptr<PrintOperatorUnit> CSharpFactory::createPrintOperator(std::string output) const
 {
-	return std::make_shared<CPPPrintOperator>(CPPPrintOperator(output));
+	return std::make_shared<CSharpPrintOperator>(CSharpPrintOperator(output));
 }

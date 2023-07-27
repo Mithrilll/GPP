@@ -9,6 +9,17 @@ enum AccessModifier
 	Private,
 };
 
+enum Type
+{
+	Void = 0,
+	Interger,
+	Float,
+	Double,
+	String,
+	Char,
+	Boolean,
+};
+
 class Unit
 {
 public:
@@ -24,21 +35,29 @@ public:
 		units.clear();
 	}
 
-	void addMethod(std::shared_ptr<Unit> unit, AccessModifier mod)
+	void addUnit(std::shared_ptr<Unit> unit, AccessModifier mod)
 	{
-		modifiers.push_back(mod);
-		units.push_back(unit);
+		units.push_back(std::make_pair(unit, mod));
 	}
 
 protected:
 	std::string name;
-	std::vector<AccessModifier> modifiers;
-	std::vector<std::shared_ptr<Unit>> units;
+	std::vector<std::pair<std::shared_ptr<Unit>, AccessModifier>> units;
 };
 
 class MethodUnit : public Unit
 {
 public:
+	struct MethodSignature
+	{
+		bool is_virtual = false;
+		bool is_static = false;
+		Type return_type = Void;
+		std::string name = "func";
+		std::vector<std::pair<Type, std::string>> args = std::vector<std::pair<Type, std::string>>(0);
+		bool is_const = false;
+	};
+
 	~MethodUnit() override
 	{
 		units.clear();
@@ -50,7 +69,7 @@ public:
 	}
 
 protected:
-	std::string name;
+	MethodSignature signature;
 	std::vector<std::shared_ptr<Unit>> units;
 };
 

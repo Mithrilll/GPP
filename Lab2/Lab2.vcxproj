@@ -84,11 +84,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CPP.cpp" />
+    <ClCompile Include="CSharp.cpp" />
+    <ClCompile Include="Java.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPP.h" />
+    <ClInclude Include="CSharp.h" />
     <ClInclude Include="Factory.h" />
+    <ClInclude Include="Java.h" />
     <ClInclude Include="Unit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

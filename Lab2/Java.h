@@ -4,34 +4,34 @@
 #include "Unit.h"
 #include "Factory.h"
 
-class CPPClass : public ClassUnit
+class JavaClass : public ClassUnit
 {
 public:
-	CPPClass(std::string n);
-	~CPPClass() override = default;
+	JavaClass(std::string n);
+	~JavaClass() override = default;
 
 	std::string compile() const override;
 };
 
-class CPPMethod : public MethodUnit
+class JavaMethod : public MethodUnit
 {
 public:
-	CPPMethod(MethodSignature s);
-	~CPPMethod() override = default;
+	JavaMethod(MethodSignature s);
+	~JavaMethod() override = default;
 
 	std::string compile() const override;
 };
 
-class CPPPrintOperator : public PrintOperatorUnit
+class JavaPrintOperator : public PrintOperatorUnit
 {
 public:
-	CPPPrintOperator(std::string out);
-	~CPPPrintOperator() override;
+	JavaPrintOperator(std::string out);
+	~JavaPrintOperator() override;
 
 	std::string compile() const override;
 };
 
-class CPPFactory : public Factory
+class JavaFactory : public Factory
 {
 public:
 	std::shared_ptr<ClassUnit> createClass(std::string name) const override;

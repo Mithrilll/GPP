@@ -4,34 +4,34 @@
 #include "Unit.h"
 #include "Factory.h"
 
-class CPPClass : public ClassUnit
+class CSharpClass : public ClassUnit
 {
 public:
-	CPPClass(std::string n);
-	~CPPClass() override = default;
+	CSharpClass(std::string n);
+	~CSharpClass() override = default;
 
 	std::string compile() const override;
 };
 
-class CPPMethod : public MethodUnit
+class CSharpMethod : public MethodUnit
 {
 public:
-	CPPMethod(MethodSignature s);
-	~CPPMethod() override = default;
+	CSharpMethod(MethodSignature s);
+	~CSharpMethod() override = default;
 
 	std::string compile() const override;
 };
 
-class CPPPrintOperator : public PrintOperatorUnit
+class CSharpPrintOperator : public PrintOperatorUnit
 {
 public:
-	CPPPrintOperator(std::string out);
-	~CPPPrintOperator() override;
+	CSharpPrintOperator(std::string out);
+	~CSharpPrintOperator() override;
 
 	std::string compile() const override;
 };
 
-class CPPFactory : public Factory
+class CSharpFactory : public Factory
 {
 public:
 	std::shared_ptr<ClassUnit> createClass(std::string name) const override;
