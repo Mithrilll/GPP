@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 
+#include "Utils.h"
 #include "Unit.h"
 #include "Factory.h"
 
@@ -35,7 +36,6 @@ class CSharpFactory : public Factory
 {
 public:
 	std::shared_ptr<ClassUnit> createClass(std::string name) const override;
-	// TODO: make method signature
 	std::shared_ptr<MethodUnit> createMethod(MethodUnit::MethodSignature signature) const override;
 	std::shared_ptr<PrintOperatorUnit> createPrintOperator(std::string output) const override;
 };

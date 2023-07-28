@@ -19,21 +19,22 @@ std::string CPPClass::compile() const
 	
 	for (int i = 0; i < units.size(); i++)
 	{
+		std::string code = units[i].first->compile();
+		addTabs(code);
+
 		switch (units[i].second)
 		{
 		case Public:
-			public_zone += units[i].first->compile() + "\n";
+			public_zone += code + "\n";
 			break;
 		case Protected:
-			protected_zone += units[i].first->compile() + "\n";
+			protected_zone += code + "\n";
 			break;
 		case Private:
-			private_zone += units[i].first->compile() + "\n";
+			private_zone += code + "\n";
 			break;
 		}
 	}
-
-	// TODO:: add tabs logic
 
 	if(public_zone != std::string("public:\n"))
 		program += public_zone;
@@ -119,9 +120,9 @@ std::string CPPMethod::compile() const
 		if (i < signature.args.size() - 1)
 			program += ",";
 	}
-	program += ") ";
+	program += ")";
 	if (signature.is_const)
-		program += "const";
+		program += " const";
 
 	program += "\n";
 
@@ -130,14 +131,13 @@ std::string CPPMethod::compile() const
 	for (int i = 0; i < units.size(); i++)
 	{
 		std::string code = units[i]->compile();
-
-		// TODO:: add tabs logic
+		addTabs(code);
 
 		program += code;
 		program += "\n";
 	}
 
-	program += "";
+	program += "\t";
 
 	switch (signature.return_type)
 	{

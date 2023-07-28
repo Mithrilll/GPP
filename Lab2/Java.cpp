@@ -14,19 +14,24 @@ std::string JavaClass::compile() const
 
 	for (int i = 0; i < units.size(); i++)
 	{
-		// TODO:: add tabs logic
+		std::string code = units[i].first->compile();
+
 		switch (units[i].second)
 		{
 		case Public:
-			program += "public " + units[i].first->compile() + "\n";
+			code = "public " + code + "\n";
 			break;
 		case Protected:
-			program += "protected " + units[i].first->compile() + "\n";
+			code = "protected " + code + "\n";
 			break;
 		case Private:
-			program += "private " + units[i].first->compile() + "\n";
+			code = "private " + code + "\n";
 			break;
 		}
+
+		addTabs(code);
+
+		program += code;
 	}
 
 	program += "}\n";
@@ -106,7 +111,7 @@ std::string JavaMethod::compile() const
 		if (i < signature.args.size() - 1)
 			program += ",";
 	}
-	program += ") ";
+	program += ")";
 	if (signature.is_const)
 		program += ""; // no this functiol in Java
 
@@ -117,14 +122,13 @@ std::string JavaMethod::compile() const
 	for (int i = 0; i < units.size(); i++)
 	{
 		std::string code = units[i]->compile();
-
-		// TODO:: add tabs logic
+		addTabs(code);
 
 		program += code;
 		program += "\n";
 	}
 
-	program += "";
+	program += "\t";
 
 	switch (signature.return_type)
 	{
