@@ -26,5 +26,37 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CPP.cpp">
+      <Filter>Translation Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSharp.cpp">
+      <Filter>Translation Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Java.cpp">
+      <Filter>Translation Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Translation Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Unit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSharp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Java.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
