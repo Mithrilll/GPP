@@ -1,7 +1,8 @@
 #pragma once
 
 #include <QtWidgets/QWidget>
-#include "ui_Widget_Drawer.h"
+#include <QtWidgets/QPushButton>
+#include "Area.h"
 
 class Widget_Drawer : public QWidget
 {
@@ -11,6 +12,8 @@ public:
     Widget_Drawer(QWidget *parent = nullptr);
     ~Widget_Drawer();
 
-private:
-    Ui::Widget_DrawerClass ui;
+protected:
+    QTextCodec* codec;
+    Area* area;
+    QPushButton* btn;
 };
