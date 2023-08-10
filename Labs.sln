@@ -7,6 +7,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lab1", "Lab1\Lab1.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lab2", "Lab2\Lab2.vcxproj", "{C54CE951-DBEC-4B58-8B3C-5E4CBEFBC2F8}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Widget_Square", "Widget_Square\Widget_Square.vcxproj", "{A6B03DF2-84EF-45F7-9EEB-65B041BB3C15}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Widget_Counter", "Widget_Counter\Widget_Counter.vcxproj", "{047F8B15-E85C-43F6-BBE6-71A2B154F8FE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Widget_Drawer", "Widget_Drawer\Widget_Drawer.vcxproj", "{EC2F8789-1771-43C9-86FB-42E2E8BA0B63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +27,18 @@ Global
 		{C54CE951-DBEC-4B58-8B3C-5E4CBEFBC2F8}.Debug|x64.Build.0 = Debug|x64
 		{C54CE951-DBEC-4B58-8B3C-5E4CBEFBC2F8}.Release|x64.ActiveCfg = Release|x64
 		{C54CE951-DBEC-4B58-8B3C-5E4CBEFBC2F8}.Release|x64.Build.0 = Release|x64
+		{A6B03DF2-84EF-45F7-9EEB-65B041BB3C15}.Debug|x64.ActiveCfg = Debug|x64
+		{A6B03DF2-84EF-45F7-9EEB-65B041BB3C15}.Debug|x64.Build.0 = Debug|x64
+		{A6B03DF2-84EF-45F7-9EEB-65B041BB3C15}.Release|x64.ActiveCfg = Release|x64
+		{A6B03DF2-84EF-45F7-9EEB-65B041BB3C15}.Release|x64.Build.0 = Release|x64
+		{047F8B15-E85C-43F6-BBE6-71A2B154F8FE}.Debug|x64.ActiveCfg = Debug|x64
+		{047F8B15-E85C-43F6-BBE6-71A2B154F8FE}.Debug|x64.Build.0 = Debug|x64
+		{047F8B15-E85C-43F6-BBE6-71A2B154F8FE}.Release|x64.ActiveCfg = Release|x64
+		{047F8B15-E85C-43F6-BBE6-71A2B154F8FE}.Release|x64.Build.0 = Release|x64
+		{EC2F8789-1771-43C9-86FB-42E2E8BA0B63}.Debug|x64.ActiveCfg = Debug|x64
+		{EC2F8789-1771-43C9-86FB-42E2E8BA0B63}.Debug|x64.Build.0 = Debug|x64
+		{EC2F8789-1771-43C9-86FB-42E2E8BA0B63}.Release|x64.ActiveCfg = Release|x64
+		{EC2F8789-1771-43C9-86FB-42E2E8BA0B63}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
