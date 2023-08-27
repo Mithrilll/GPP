@@ -38,6 +38,12 @@
     <ClCompile Include="ChartData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Reader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IoC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MainWindow.h">
@@ -52,6 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChartData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IoC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

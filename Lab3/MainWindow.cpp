@@ -1,7 +1,7 @@
 #include <QSplitter>
 
 #include "MainWindow.h"
-
+#include "IoC.h"
 
 MainWindow::MainWindow() :
 	QMainWindow(nullptr)
@@ -20,4 +20,27 @@ MainWindow::MainWindow() :
 	setCentralWidget(splitter);
 
 	setMinimumHeight(450);
+
+
+	QObject::connect(files_view, &FilesView::fileSelected, this, &MainWindow::onFileSelected);
+	QObject::connect(this, &MainWindow::fileReadSucceed, charts_view, &ChartsView::onFileReadSucceed);
+	QObject::connect(this, &MainWindow::fileReadFailed, charts_view, &ChartsView::onFileReadFailed);
+}
+
+void MainWindow::onFileSelected(const QFileInfo& info)
+{
+	auto reader = IoCContainer::getService<IReader>();
+
+	if (reader.get() == nullptr)
+	{
+		emit fileReadFailed("Failed to read file, now suitable reader.");
+		return;
+	}
+
+	auto ret = reader->readFile(info.absoluteFilePath());
+
+	if (ret.has_value())
+		emit fileReadSucceed(ret.value());
+	else
+		emit fileReadFailed("Failed to read file, wrong data.");
 }
