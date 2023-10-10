@@ -8,18 +8,18 @@ Widget_Square::Widget_Square(QWidget *parent)
     : QWidget(parent)
 {
     codec = QTextCodec::codecForName("Windows-1251");
-    setWindowTitle(codec->toUnicode("Возведение в квадрат"));
+    setWindowTitle(codec->toUnicode("Square"));
     frame = new QFrame(this);
     frame->setFrameShadow(QFrame::Raised);
     frame->setFrameShape(QFrame::Panel);
-    inputLabel = new QLabel(codec->toUnicode("Введите число:"), this);
+    inputLabel = new QLabel(codec->toUnicode("Enter number:"), this);
     inputEdit = new QLineEdit("", this);
     StrValidator* v = new StrValidator(inputEdit);
     inputEdit->setValidator(v);
-    outputLabel = new QLabel(codec->toUnicode("Результат:"), this);
+    outputLabel = new QLabel(codec->toUnicode("Result:"), this);
     outputEdit = new QLineEdit("", this);
-    nextButton = new QPushButton(codec->toUnicode("Следующее"), this);
-    exitButton = new QPushButton(codec->toUnicode("Выход"), this);
+    nextButton = new QPushButton(codec->toUnicode("Next"), this);
+    exitButton = new QPushButton(codec->toUnicode("Quit"), this);
     
     QVBoxLayout* vLayout1 = new QVBoxLayout(frame);
     vLayout1->addWidget(inputLabel);
