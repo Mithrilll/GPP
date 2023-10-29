@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Widget_Drawer", "Widget_Dra
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IOC", "IOC\IOC.vcxproj", "{E01B3D1D-7FAF-4533-8899-3FC2375AD9E2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lab3", "Lab3\Lab3.vcxproj", "{9FE2BC25-ACC4-4022-8970-CE7E202CFA59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -71,6 +73,14 @@ Global
 		{E01B3D1D-7FAF-4533-8899-3FC2375AD9E2}.Release|x64.Build.0 = Release|x64
 		{E01B3D1D-7FAF-4533-8899-3FC2375AD9E2}.Release|x86.ActiveCfg = Release|x64
 		{E01B3D1D-7FAF-4533-8899-3FC2375AD9E2}.Release|x86.Build.0 = Release|x64
+		{9FE2BC25-ACC4-4022-8970-CE7E202CFA59}.Debug|x64.ActiveCfg = Debug|x64
+		{9FE2BC25-ACC4-4022-8970-CE7E202CFA59}.Debug|x64.Build.0 = Debug|x64
+		{9FE2BC25-ACC4-4022-8970-CE7E202CFA59}.Debug|x86.ActiveCfg = Debug|x64
+		{9FE2BC25-ACC4-4022-8970-CE7E202CFA59}.Debug|x86.Build.0 = Debug|x64
+		{9FE2BC25-ACC4-4022-8970-CE7E202CFA59}.Release|x64.ActiveCfg = Release|x64
+		{9FE2BC25-ACC4-4022-8970-CE7E202CFA59}.Release|x64.Build.0 = Release|x64
+		{9FE2BC25-ACC4-4022-8970-CE7E202CFA59}.Release|x86.ActiveCfg = Release|x64
+		{9FE2BC25-ACC4-4022-8970-CE7E202CFA59}.Release|x86.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
 #include "Figura.h"
+#include <cmath>
 
 Figura::Figura(int X, int Y, int Halflen) :
 	x(X), y(Y), halflen(Halflen) {}
